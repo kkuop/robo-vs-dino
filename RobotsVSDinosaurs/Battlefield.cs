@@ -8,10 +8,6 @@ namespace RobotsVSDinosaurs
 {
     class Battlefield
     {
-        //member vars
-
-        //constructor
-
         //methods
         public void startFight()
         {
@@ -25,27 +21,48 @@ namespace RobotsVSDinosaurs
             Fleet robots = new Fleet(new List<Robot> { blueRobot, redRobot, pinkRobot });
             Console.WriteLine("Welcome to Robot VS Dinosaur! \n \n Press enter to begin...\n");
             Console.ReadLine();
-            for (int i = 0; i < dinos.listOfDinos.Count; i++)
+
+            int attackCounter = 0;
+            while (dinos.listOfDinos[0].health>0&&dinos.listOfDinos[1].health>0&&dinos.listOfDinos[2].health>0 || robots.listOfRobots[0].health>0&&robots.listOfRobots[1].health>0&&robots.listOfRobots[2].health>0){ 
+            for (int i=0; i<dinos.listOfDinos.Count;i++)
             {
-                for (int j = 0; j < robots.listOfRobots.Count; j++)
+                while (attackCounter<3)
                 {
-                    if(dinos.listOfDinos[i].health > 0)
-                    {
-                        if(robots.listOfRobots[i].health==0)
-                        {
-                            continue;
-                        }
-                        else
-                        {
-                            dinos.listOfDinos[i].DinoAttackRobot();
-                        }
-                    }
+                    dinos.listOfDinos[i].DinoAttackRobot();
+                    attackCounter++;
                 }
+                    attackCounter = 0;
             }
+            for (int i=0;i<robots.listOfRobots.Count;i++)
+            {
+                while (attackCounter<3)
+                {
+                    robots.listOfRobots[i].RobotAttackDino();
+                    attackCounter++;
+                }
+                    attackCounter = 0;
+            }
+            }
+            //for (int i = 0; i < dinos.listOfDinos.Count; i++)
+            //{
+            //    for (int j = 0; j < robots.listOfRobots.Count; j++)
+            //    {
+            //        if(dinos.listOfDinos[i].health > 0)
+            //        {
+            //            while (dinos.listOfDinos[i].health >0) 
+            //            {
+            //                dinos.listOfDinos[i].DinoAttackRobot();
+            //                attackCounter++;
+            //            }
+            //        }
+            //    }
+            //}
+            Console.WriteLine("The Dinos\n");
             for (int i=0; i<dinos.listOfDinos.Count; i++)
             {
                 Console.WriteLine($"{dinos.listOfDinos[i].type}\nHealth: {dinos.listOfDinos[i].health}\nEnergy: {dinos.listOfDinos[i].energy}\n");               
             }
+            Console.WriteLine("The Robos\n");
             for (int i=0; i<robots.listOfRobots.Count; i++)
             {
                 Console.WriteLine($"{robots.listOfRobots[i].name}\nHealth: {robots.listOfRobots[i].health}\nPower Level: {robots.listOfRobots[i].powerLevel}\n");

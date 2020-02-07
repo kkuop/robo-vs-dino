@@ -26,7 +26,7 @@ namespace RobotsVSDinosaurs
         public void DinoAttackRobot()
         {
             health -= attackPower;
-            energy -= 5;
+            energy -= 10;
         }        
     }
 }
