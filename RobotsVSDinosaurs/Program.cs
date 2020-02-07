@@ -12,6 +12,7 @@ namespace RobotsVSDinosaurs
         {
             Battlefield initialize = new Battlefield();
             initialize.startFight();
+            Console.ReadLine();
         }
     }
 }

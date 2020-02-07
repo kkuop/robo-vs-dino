@@ -31,9 +31,24 @@ namespace RobotsVSDinosaurs
                 {
                     if(dinos.listOfDinos[i].health > 0)
                     {
-
+                        if(robots.listOfRobots[i].health==0)
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            dinos.listOfDinos[i].DinoAttackRobot();
+                        }
                     }
                 }
+            }
+            for (int i=0; i<dinos.listOfDinos.Count; i++)
+            {
+                Console.WriteLine($"{dinos.listOfDinos[i].type}\nHealth: {dinos.listOfDinos[i].health}\nEnergy: {dinos.listOfDinos[i].energy}\n");               
+            }
+            for (int i=0; i<robots.listOfRobots.Count; i++)
+            {
+                Console.WriteLine($"{robots.listOfRobots[i].name}\nHealth: {robots.listOfRobots[i].health}\nPower Level: {robots.listOfRobots[i].powerLevel}\n");
             }
         }
     }
