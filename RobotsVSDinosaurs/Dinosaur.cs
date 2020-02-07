@@ -23,10 +23,10 @@ namespace RobotsVSDinosaurs
             this.attackPower = attackPower;
         }
         //methods
-        public void DinoAttackRobot()
+        public void AttackFromRobot()
         {
             health -= attackPower;
             energy -= 10;
-        }        
+        }
     }
 }

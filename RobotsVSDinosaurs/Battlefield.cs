@@ -28,7 +28,7 @@ namespace RobotsVSDinosaurs
             {
                 while (attackCounter<3)
                 {
-                    dinos.listOfDinos[i].DinoAttackRobot();
+                    dinos.listOfDinos[i].AttackFromRobot();
                     attackCounter++;
                 }
                     attackCounter = 0;
@@ -37,7 +37,7 @@ namespace RobotsVSDinosaurs
             {
                 while (attackCounter<3)
                 {
-                    robots.listOfRobots[i].RobotAttackDino();
+                    robots.listOfRobots[i].AttackFromDino();
                     attackCounter++;
                 }
                     attackCounter = 0;

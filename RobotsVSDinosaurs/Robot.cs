@@ -24,7 +24,7 @@ namespace RobotsVSDinosaurs
             this.weapon = weapon;
         }
         //methods
-        public void RobotAttackDino()
+        public void AttackFromDino()
         {
             health -= weapon.attackPower;
             powerLevel -= 10;
