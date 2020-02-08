@@ -37,6 +37,7 @@ namespace RobotsVSDinosaurs
                         }
                         else
                         {
+                            dinos.listOfDinos[i].isAlive = false;
                             break;
                         }
                 }
@@ -57,6 +58,7 @@ namespace RobotsVSDinosaurs
                         }
                         else
                         {
+                            robots.listOfRobots[i].isAlive = false;
                             break;
                         }
                 }
