@@ -13,6 +13,7 @@ namespace RobotsVSDinosaurs
         public int health;
         public int powerLevel;
         public Weapon weapon;
+        public bool isAlive = true;
 
 
         //constructor

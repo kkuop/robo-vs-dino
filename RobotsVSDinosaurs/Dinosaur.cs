@@ -13,6 +13,8 @@ namespace RobotsVSDinosaurs
         public int health;
         public int energy;
         public int attackPower;
+        public bool isAlive = true;
+        
 
         //constructor
         public Dinosaur(string type, int health, int energy, int attackPower) 
@@ -26,7 +28,7 @@ namespace RobotsVSDinosaurs
         public void AttackFromRobot()
         {
             health -= attackPower;
-            energy -= 10;
+            energy -= 10;            
         }
     }
 }

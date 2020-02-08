@@ -23,24 +23,49 @@ namespace RobotsVSDinosaurs
             Console.ReadLine();
 
             int attackCounter = 0;
-            while (dinos.listOfDinos[0].health>0&&dinos.listOfDinos[1].health>0&&dinos.listOfDinos[2].health>0 || robots.listOfRobots[0].health>0&&robots.listOfRobots[1].health>0&&robots.listOfRobots[2].health>0){ 
+            int attacksPerSide = 2;
+            while (dinos.listOfDinos[0].isAlive==true&&dinos.listOfDinos[1].isAlive==true&&dinos.listOfDinos[2].isAlive==true && robots.listOfRobots[0].isAlive==true&&robots.listOfRobots[1].isAlive==true&&robots.listOfRobots[2].isAlive==true){ 
             for (int i=0; i<dinos.listOfDinos.Count;i++)
             {
-                while (attackCounter<3)
+                while (attackCounter<attacksPerSide)
                 {
-                    dinos.listOfDinos[i].AttackFromRobot();
-                    attackCounter++;
+                        if (dinos.listOfDinos[i].health > 0)
+                        {
+                            dinos.listOfDinos[i].AttackFromRobot();
+                            attackCounter++;
+                        }
+                        else
+                        {
+                            attackCounter = 0;
+                            break;
+                        }
                 }
                     attackCounter = 0;
+                    if (dinos.listOfDinos[i].health<0)
+                    {
+                        dinos.listOfDinos[i].isAlive = false;
+                    }
             }
             for (int i=0;i<robots.listOfRobots.Count;i++)
             {
-                while (attackCounter<3)
+                while (attackCounter<attacksPerSide)
                 {
-                    robots.listOfRobots[i].AttackFromDino();
-                    attackCounter++;
+                        if (robots.listOfRobots[i].health > 0)
+                        {
+                            robots.listOfRobots[i].AttackFromDino();
+                            attackCounter++;
+                        }
+                        else
+                        {
+                            attackCounter = 0;
+                            break;
+                        }
                 }
                     attackCounter = 0;
+                    if (robots.listOfRobots[i].health<0)
+                    {
+                        robots.listOfRobots[i].isAlive = false;
+                    }
             }
             }
             //for (int i = 0; i < dinos.listOfDinos.Count; i++)
