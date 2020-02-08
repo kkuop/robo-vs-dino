@@ -25,8 +25,9 @@ namespace RobotsVSDinosaurs
             //set the variables for the attackCounter and how many attacks each warrior gets
             int attackCounter = 0;
             int attacksPerFighter = 2;
-            while (dinos.listOfDinos[0].isAlive==true&&dinos.listOfDinos[1].isAlive==true&&dinos.listOfDinos[2].isAlive==true && robots.listOfRobots[0].isAlive==true&&robots.listOfRobots[1].isAlive==true&&robots.listOfRobots[2].isAlive==true){ 
-            for (int i=0; i<dinos.listOfDinos.Count;i++)
+            while ((dinos.listOfDinos[0].isAlive && dinos.listOfDinos[1].isAlive && dinos.listOfDinos[2].isAlive == true) || (robots.listOfRobots[0].isAlive && robots.listOfRobots[1].isAlive && robots.listOfRobots[2].isAlive == true))
+            {
+                for (int i=0; i<dinos.listOfDinos.Count;i++)
             {
                 while (attackCounter<attacksPerFighter)
                 {
