@@ -9,7 +9,7 @@ namespace RobotsVSDinosaurs
     class Battlefield
     {
         //methods
-        public void startFight()
+        public void startBattle()
         {
             Dinosaur raptor = new Dinosaur("raptor", 100, 100, 15);
             Dinosaur brontosaurus = new Dinosaur("bronto", 100, 80, 5);
