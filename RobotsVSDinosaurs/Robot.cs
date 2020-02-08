@@ -25,10 +25,10 @@ namespace RobotsVSDinosaurs
             this.weapon = weapon;
         }
         //methods
-        public void AttackFromDino()
-        {
-            health -= weapon.attackPower;
-            powerLevel -= 10;
-        }
+        //public void AttackFromDino()
+        //{
+        //    health -= weapon.attackPower;
+        //    powerLevel -= 10;
+        //}
     }
 }

@@ -9,7 +9,7 @@ namespace RobotsVSDinosaurs
     class Battlefield
     {
         //methods
-        public void startBattle()
+        public void StartBattle()
         {
             Dinosaur raptor = new Dinosaur("raptor", 100, 100, 15);
             Dinosaur brontosaurus = new Dinosaur("bronto", 100, 80, 5);
@@ -31,12 +31,11 @@ namespace RobotsVSDinosaurs
                 {
                         if (dinos.listOfDinos[i].health > 0)
                         {
-                            dinos.listOfDinos[i].AttackFromRobot();
+                            dinos.listOfDinos[i].health -= robots.listOfRobots[i].weapon.attackPower;
                             attackCounter++;
                         }
                         else
                         {
-                            attackCounter = 0;
                             break;
                         }
                 }
@@ -52,12 +51,11 @@ namespace RobotsVSDinosaurs
                 {
                         if (robots.listOfRobots[i].health > 0)
                         {
-                            robots.listOfRobots[i].AttackFromDino();
+                            robots.listOfRobots[i].health-=dinos.listOfDinos[i].attackPower;
                             attackCounter++;
                         }
                         else
                         {
-                            attackCounter = 0;
                             break;
                         }
                 }

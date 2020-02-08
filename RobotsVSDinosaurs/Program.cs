@@ -11,7 +11,7 @@ namespace RobotsVSDinosaurs
         static void Main(string[] args)
         {
             Battlefield initialize = new Battlefield();
-            initialize.startBattle();
+            initialize.StartBattle();
             Console.ReadLine();
         }
     }
