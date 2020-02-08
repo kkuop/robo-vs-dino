@@ -11,6 +11,7 @@ namespace RobotsVSDinosaurs
         //methods
         public void StartBattle()
         {
+            //instantiate the 3 dinos and 3 robots and add them to a list
             Dinosaur raptor = new Dinosaur("raptor", 100, 100, 15);
             Dinosaur brontosaurus = new Dinosaur("bronto", 100, 80, 5);
             Dinosaur stegosaurus = new Dinosaur("stego", 100, 75, 8);
@@ -21,13 +22,13 @@ namespace RobotsVSDinosaurs
             Fleet robots = new Fleet(new List<Robot> { blueRobot, redRobot, pinkRobot });
             Console.WriteLine("Welcome to Robot VS Dinosaur! \n \n Press enter to begin...\n");
             Console.ReadLine();
-
+            //set the variables for the attackCounter and how many attacks each warrior gets
             int attackCounter = 0;
-            int attacksPerSide = 2;
+            int attacksPerFighter = 2;
             while (dinos.listOfDinos[0].isAlive==true&&dinos.listOfDinos[1].isAlive==true&&dinos.listOfDinos[2].isAlive==true && robots.listOfRobots[0].isAlive==true&&robots.listOfRobots[1].isAlive==true&&robots.listOfRobots[2].isAlive==true){ 
             for (int i=0; i<dinos.listOfDinos.Count;i++)
             {
-                while (attackCounter<attacksPerSide)
+                while (attackCounter<attacksPerFighter)
                 {
                         if (dinos.listOfDinos[i].health > 0)
                         {
@@ -47,7 +48,7 @@ namespace RobotsVSDinosaurs
             }
             for (int i=0;i<robots.listOfRobots.Count;i++)
             {
-                while (attackCounter<attacksPerSide)
+                while (attackCounter<attacksPerFighter)
                 {
                         if (robots.listOfRobots[i].health > 0)
                         {
