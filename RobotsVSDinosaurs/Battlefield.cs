@@ -14,84 +14,123 @@ namespace RobotsVSDinosaurs
         string firstChoice = "Energy Sword";
         string secondChoice = "Assault Rifle";
         string thirdChoice = "Sniper Rifle";
-        string blueChoice;
-        string redChoice;
-        string pinkChoice;
-
+        ConsoleKeyInfo blueChoice;
+        ConsoleKeyInfo redChoice;
+        ConsoleKeyInfo pinkChoice;
+        int blueWeaponChoice;
+        int redWeaponChoice;
+        int pinkWeaponChoice;
+                
         //methods
-        public void StartBattle()
+        public void StartBattle()        
         {
-            Console.WriteLine("Please choose a weapon for the Blue Robot: \n a) Energy Sword \n b) Assault Rifle \n c) Sniper Rifle");
-            ConsoleKeyInfo keyCapture = Console.ReadKey();
-            if (keyCapture.Key == ConsoleKey.A)
-            {
-                blueChoice = firstChoice;
+            Console.WriteLine("Welcome to the battle of the Robots and Dinosaurs.");
+            Console.WriteLine("Let's introduce the dinosaurs...");
+            Console.ReadLine();
+            Dinosaur raptor = new Dinosaur("Raptor", 100, 100, randomNumber.Next(attackLowValue, attackHighValue));            
+            Console.WriteLine($"\n{raptor.type}\nHealth: {raptor.health}\nEnergy: {raptor.energy}");
+            Console.ReadLine();
+            Dinosaur bronto = new Dinosaur("Brontosaurus", 100, 100, randomNumber.Next(attackLowValue, attackHighValue));
+            Console.WriteLine($"\n{bronto.type}\nHealth: {bronto.health}\nEnergy: {bronto.energy}");
+            Console.ReadLine();
+            Dinosaur stego = new Dinosaur("Stegosaurus", 100, 100, randomNumber.Next(attackLowValue, attackHighValue));
+            Console.WriteLine($"\n{stego.type}\nHealth: {stego.health}\nEnergy: {stego.energy}");
+            Console.ReadLine();
+
+
+            Weapon firstChoice = new Weapon(this.firstChoice, randomNumber.Next(attackLowValue, attackHighValue));
+            Weapon secondChoice = new Weapon(this.secondChoice, randomNumber.Next(attackLowValue, attackHighValue));
+            Weapon thirdChoice = new Weapon(this.thirdChoice, randomNumber.Next(attackLowValue, attackHighValue));
+            Weapons weapons = new Weapons(new List<Weapon> {firstChoice,secondChoice,thirdChoice});
+            Console.WriteLine($"\nWhich weapon would you like the blue robot to use?\na) {weapons.listOfWeapons[0].type}\nb) {weapons.listOfWeapons[1].type}\nc) {weapons.listOfWeapons[2].type}");
+            for (int i = 0; i < 1000; i++)
+            {            
+                blueChoice = Console.ReadKey();
+                if (blueChoice.Key == ConsoleKey.A)
+                {
+                    blueWeaponChoice = 0;
+                    break;
+                }
+                else if(blueChoice.Key == ConsoleKey.B )
+                {
+                    blueWeaponChoice = 1;
+                    break;
+                }
+                else if (blueChoice.Key == ConsoleKey.C)
+                {
+                    blueWeaponChoice = 2;
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("\nThat is not a valid choice... try again.");
+                }
             }
-            else if (keyCapture.Key == ConsoleKey.B)
+            Console.WriteLine($"\n\nWhich weapon would you like the red robot to use?\na) {weapons.listOfWeapons[0].type}\nb) {weapons.listOfWeapons[1].type}\nc) {weapons.listOfWeapons[2].type}");
+            for (int i = 0; i < 1000; i++)
             {
-                blueChoice = secondChoice;
+                redChoice = Console.ReadKey();
+                if (redChoice.Key == ConsoleKey.A)
+                {
+                    redWeaponChoice = 0;
+                    break;
+                }
+                else if (redChoice.Key == ConsoleKey.B)
+                {
+                    redWeaponChoice = 1;
+                    break;
+                }
+                else if (redChoice.Key == ConsoleKey.C)
+                {
+                    redWeaponChoice = 2;
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("\nThat is not a valid choice... try again.");
+                }
             }
-            else if (keyCapture.Key == ConsoleKey.C)
+            Console.WriteLine($"\n\nWhich weapon would you like the pink robot to use?\na) {weapons.listOfWeapons[0].type}\nb) {weapons.listOfWeapons[1].type}\nc) {weapons.listOfWeapons[2].type}");
+            for (int i = 0; i < 1000; i++)
             {
-                blueChoice = thirdChoice;
+                pinkChoice = Console.ReadKey();
+                if (pinkChoice.Key == ConsoleKey.A)
+                {
+                    pinkWeaponChoice = 0;
+                    break;
+                }
+                else if (pinkChoice.Key == ConsoleKey.B)
+                {
+                    pinkWeaponChoice = 1;
+                    break;
+                }
+                else if (pinkChoice.Key == ConsoleKey.C)
+                {
+                    pinkWeaponChoice = 2;
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("\nThat is not a valid choice... try again.");
+                }
             }
-            else
-            {
-                Console.WriteLine("That was not a valid option.");
-            }
-            Console.WriteLine("\nPlease choose a weapon for the Red Robot: \n a) Energy Sword \n b) Assault Rifle \n c) Sniper Rifle\n");
-            ConsoleKeyInfo keyCaptureTwo = Console.ReadKey();
-            if (keyCaptureTwo.Key == ConsoleKey.A)
-            {
-                redChoice = firstChoice;
-            }
-            else if (keyCaptureTwo.Key == ConsoleKey.B)
-            {
-                redChoice = secondChoice;
-            }
-            else if (keyCaptureTwo.Key == ConsoleKey.C)
-            {
-                redChoice = thirdChoice;
-            }
-            else
-            {
-                Console.WriteLine("That was not a valid option.");
-            }
-            Console.WriteLine("\nPlease choose a weapon for the Pink Robot: \n a) Energy Sword \n b) Assault Rifle \n c) Sniper Rifle\n");
-            ConsoleKeyInfo keyCaptureThree = Console.ReadKey();
-            if (keyCaptureThree.Key == ConsoleKey.A)
-            {
-                pinkChoice = firstChoice;
-            }
-            else if (keyCaptureThree.Key == ConsoleKey.B)
-            {
-                pinkChoice = secondChoice;
-            }
-            else if (keyCaptureThree.Key == ConsoleKey.C)
-            {
-                pinkChoice = thirdChoice;
-            }
-            else
-            {
-                Console.WriteLine("That was not a valid option.");
-            }
-            //instantiate the 3 dinos and 3 robots and add them to a list
-            Dinosaur raptor = new Dinosaur("raptor", 100, 100, randomNumber.Next(attackLowValue, attackHighValue));            
-            Dinosaur bronto = new Dinosaur("brontosaurus", 100, 100, randomNumber.Next(attackLowValue, attackHighValue));            
-            Dinosaur stego = new Dinosaur("stegosaurus", 100, 100, randomNumber.Next(attackLowValue,attackHighValue));            
-            Robot blueRobot = new Robot("caboose", 100, 100, new Weapon(blueChoice, randomNumber.Next(attackLowValue,attackHighValue)));            
-            Robot redRobot = new Robot("Sarge", 100, 100, new Weapon(redChoice, randomNumber.Next(attackLowValue,attackHighValue)));            
-            Robot pinkRobot = new Robot("Simmons", 100, 100, new Weapon(pinkChoice, randomNumber.Next(attackLowValue,attackHighValue)));
+            
+            
+            Robot blueRobot = new Robot("Caboose", 100, 100, weapons.listOfWeapons[blueWeaponChoice]);            
+            Robot redRobot = new Robot("Sarge", 100, 100, weapons.listOfWeapons[redWeaponChoice]);
+            Robot pinkRobot = new Robot("Simmons", 100, 100, weapons.listOfWeapons[pinkWeaponChoice]);
+
             Herd dinos = new Herd(new List<Dinosaur> { raptor, bronto, stego });
             Fleet robots = new Fleet(new List<Robot> { blueRobot, redRobot, pinkRobot });
-            Console.WriteLine("\nWelcome to Robot VS Dinosaur! \n \n Press enter to begin...\n");
-            Console.ReadLine();
+            
             //set the member variables 
             int attackCounter = 0;
             int attacksPerFighter = 1;
             bool dinosAreDead = false;
             bool robotsAreDead = false;
             int costOfAttack = 10;
+            Console.WriteLine("\nLet the fight begin...\n");
+            Console.ReadLine();
             //while loop that runs while both sides are still alive
             while (dinosAreDead == false && robotsAreDead == false)
             {
@@ -169,6 +208,7 @@ namespace RobotsVSDinosaurs
                     }
                 }
             }
+            
             //write the results to the console
             Console.WriteLine("The Dinosaurs\n");
             for (int i=0; i<dinos.listOfDinos.Count; i++)

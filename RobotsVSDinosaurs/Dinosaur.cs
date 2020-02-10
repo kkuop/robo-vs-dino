@@ -24,11 +24,7 @@ namespace RobotsVSDinosaurs
             this.energy = energy;
             this.attackPower = attackPower;
         }
+
         //methods
-        //public void AttackFromRobot()
-        //{
-        //    health -= attackPower;
-        //    energy -= 10;            
-        //}
     }
 }
