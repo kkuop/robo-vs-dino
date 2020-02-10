@@ -8,16 +8,19 @@ namespace RobotsVSDinosaurs
 {
     class Battlefield
     {
+        int attackLowValue = 25;
+        int attackHighValue = 75;
         //methods
         public void StartBattle()
         {
             //instantiate the 3 dinos and 3 robots and add them to a list
-            Dinosaur raptor = new Dinosaur("raptor", 100, 100, 8);
-            Dinosaur bronto = new Dinosaur("brontosaurus", 100, 80, 2);
-            Dinosaur stego = new Dinosaur("stegosaurus", 100, 75, 6);
-            Robot blueRobot = new Robot("caboose", 100, 100, new Weapon("Energy Sword", 22));
-            Robot redRobot = new Robot("Sarge", 100, 100, new Weapon("Assault Rifle", 12));
-            Robot pinkRobot = new Robot("Simmons", 100, 100, new Weapon("Sniper", 25));
+            Random randomNumber = new Random();
+            Dinosaur raptor = new Dinosaur("raptor", 100, 100, randomNumber.Next(attackLowValue, attackHighValue));
+            Dinosaur bronto = new Dinosaur("brontosaurus", 100, 80, randomNumber.Next(attackLowValue, attackHighValue));
+            Dinosaur stego = new Dinosaur("stegosaurus", 100, 75, randomNumber.Next(attackLowValue,attackHighValue));
+            Robot blueRobot = new Robot("caboose", 100, 100, new Weapon("Energy Sword", randomNumber.Next(attackLowValue,attackHighValue)));
+            Robot redRobot = new Robot("Sarge", 100, 100, new Weapon("Assault Rifle", randomNumber.Next(attackLowValue,attackHighValue)));
+            Robot pinkRobot = new Robot("Simmons", 100, 100, new Weapon("Sniper", randomNumber.Next(attackLowValue,attackHighValue)));
             Herd dinos = new Herd(new List<Dinosaur> { raptor, bronto, stego });
             Fleet robots = new Fleet(new List<Robot> { blueRobot, redRobot, pinkRobot });
             Console.WriteLine("Welcome to Robot VS Dinosaur! \n \n Press enter to begin...\n");
@@ -78,13 +81,15 @@ namespace RobotsVSDinosaurs
                         else
                         {
                             robots.listOfRobots[i].isAlive = false;
+                            robots.listOfRobots[i].health = 0;
                             break;
                         }
                 }
                     attackCounter = 0;
                     if (robots.listOfRobots[i].health<=0)
                     {
-                        robots.listOfRobots[i].isAlive = false;                        
+                        robots.listOfRobots[i].isAlive = false;
+                        robots.listOfRobots[i].health = 0;
                     }
             }
             }
@@ -102,15 +107,23 @@ namespace RobotsVSDinosaurs
             //        }
             //    }
             //}
-            Console.WriteLine("The Dinos\n");
+            Console.WriteLine("The Dinosaurs\n");
             for (int i=0; i<dinos.listOfDinos.Count; i++)
             {
                 Console.WriteLine($"{dinos.listOfDinos[i].type}\nHealth: {dinos.listOfDinos[i].health}\nEnergy: {dinos.listOfDinos[i].energy}\n");               
             }
-            Console.WriteLine("The Robos\n");
+            Console.WriteLine("The Robots\n");
             for (int i=0; i<robots.listOfRobots.Count; i++)
             {
                 Console.WriteLine($"{robots.listOfRobots[i].name}\nHealth: {robots.listOfRobots[i].health}\nPower Level: {robots.listOfRobots[i].powerLevel}\n");
+            }
+            if (dinosAreDead==true)
+            {
+                Console.WriteLine("The Robots win the fight!");
+            }
+            else
+            {
+                Console.WriteLine("The Dinosaurs win the fight!");
             }
         }
     }
