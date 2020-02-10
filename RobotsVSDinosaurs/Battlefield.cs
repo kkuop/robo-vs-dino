@@ -9,21 +9,82 @@ namespace RobotsVSDinosaurs
     class Battlefield
     {
         Random randomNumber = new Random();
-        int attackLowValue = 15;
+        int attackLowValue = 5;
         int attackHighValue = 50;
+        string firstChoice = "Energy Sword";
+        string secondChoice = "Assault Rifle";
+        string thirdChoice = "Sniper Rifle";
+        string blueChoice;
+        string redChoice;
+        string pinkChoice;
+
         //methods
         public void StartBattle()
         {
+            Console.WriteLine("Please choose a weapon for the Blue Robot: \n a) Energy Sword \n b) Assault Rifle \n c) Sniper Rifle");
+            ConsoleKeyInfo keyCapture = Console.ReadKey();
+            if (keyCapture.Key == ConsoleKey.A)
+            {
+                blueChoice = firstChoice;
+            }
+            else if (keyCapture.Key == ConsoleKey.B)
+            {
+                blueChoice = secondChoice;
+            }
+            else if (keyCapture.Key == ConsoleKey.C)
+            {
+                blueChoice = thirdChoice;
+            }
+            else
+            {
+                Console.WriteLine("That was not a valid option.");
+            }
+            Console.WriteLine("\nPlease choose a weapon for the Red Robot: \n a) Energy Sword \n b) Assault Rifle \n c) Sniper Rifle\n");
+            ConsoleKeyInfo keyCaptureTwo = Console.ReadKey();
+            if (keyCaptureTwo.Key == ConsoleKey.A)
+            {
+                redChoice = firstChoice;
+            }
+            else if (keyCaptureTwo.Key == ConsoleKey.B)
+            {
+                redChoice = secondChoice;
+            }
+            else if (keyCaptureTwo.Key == ConsoleKey.C)
+            {
+                redChoice = thirdChoice;
+            }
+            else
+            {
+                Console.WriteLine("That was not a valid option.");
+            }
+            Console.WriteLine("\nPlease choose a weapon for the Pink Robot: \n a) Energy Sword \n b) Assault Rifle \n c) Sniper Rifle\n");
+            ConsoleKeyInfo keyCaptureThree = Console.ReadKey();
+            if (keyCaptureThree.Key == ConsoleKey.A)
+            {
+                pinkChoice = firstChoice;
+            }
+            else if (keyCaptureThree.Key == ConsoleKey.B)
+            {
+                pinkChoice = secondChoice;
+            }
+            else if (keyCaptureThree.Key == ConsoleKey.C)
+            {
+                pinkChoice = thirdChoice;
+            }
+            else
+            {
+                Console.WriteLine("That was not a valid option.");
+            }
             //instantiate the 3 dinos and 3 robots and add them to a list
             Dinosaur raptor = new Dinosaur("raptor", 100, 100, randomNumber.Next(attackLowValue, attackHighValue));            
-            Dinosaur bronto = new Dinosaur("brontosaurus", 100, 80, randomNumber.Next(attackLowValue, attackHighValue));            
-            Dinosaur stego = new Dinosaur("stegosaurus", 100, 75, randomNumber.Next(attackLowValue,attackHighValue));            
-            Robot blueRobot = new Robot("caboose", 100, 100, new Weapon("Energy Sword", randomNumber.Next(attackLowValue,attackHighValue)));            
-            Robot redRobot = new Robot("Sarge", 100, 100, new Weapon("Assault Rifle", randomNumber.Next(attackLowValue,attackHighValue)));            
-            Robot pinkRobot = new Robot("Simmons", 100, 100, new Weapon("Sniper", randomNumber.Next(attackLowValue,attackHighValue)));
+            Dinosaur bronto = new Dinosaur("brontosaurus", 100, 100, randomNumber.Next(attackLowValue, attackHighValue));            
+            Dinosaur stego = new Dinosaur("stegosaurus", 100, 100, randomNumber.Next(attackLowValue,attackHighValue));            
+            Robot blueRobot = new Robot("caboose", 100, 100, new Weapon(blueChoice, randomNumber.Next(attackLowValue,attackHighValue)));            
+            Robot redRobot = new Robot("Sarge", 100, 100, new Weapon(redChoice, randomNumber.Next(attackLowValue,attackHighValue)));            
+            Robot pinkRobot = new Robot("Simmons", 100, 100, new Weapon(pinkChoice, randomNumber.Next(attackLowValue,attackHighValue)));
             Herd dinos = new Herd(new List<Dinosaur> { raptor, bronto, stego });
             Fleet robots = new Fleet(new List<Robot> { blueRobot, redRobot, pinkRobot });
-            Console.WriteLine("Welcome to Robot VS Dinosaur! \n \n Press enter to begin...\n");
+            Console.WriteLine("\nWelcome to Robot VS Dinosaur! \n \n Press enter to begin...\n");
             Console.ReadLine();
             //set the member variables 
             int attackCounter = 0;
@@ -37,13 +98,11 @@ namespace RobotsVSDinosaurs
                 //before we attack we will check to see if either side is completely dead
                 if (dinos.listOfDinos[0].isAlive == false && dinos.listOfDinos[1].isAlive == false && dinos.listOfDinos[2].isAlive == false)
                 {
-                    dinosAreDead = true;
-                    continue;
+                    dinosAreDead = true;                    
                 }
                 if (robots.listOfRobots[0].isAlive == false && robots.listOfRobots[1].isAlive == false && robots.listOfRobots[2].isAlive == false)
                 {
-                    robotsAreDead = true;
-                    continue;
+                    robotsAreDead = true;                    
                 }
                 //since neither side is dead, we will begin with the robots attacking first                
                 for (int i=0; i<dinos.listOfDinos.Count;i++)
@@ -119,7 +178,7 @@ namespace RobotsVSDinosaurs
             Console.WriteLine("The Robots\n");
             for (int i=0; i<robots.listOfRobots.Count; i++)
             {
-                Console.WriteLine($"{robots.listOfRobots[i].name}\nHealth: {robots.listOfRobots[i].health}\nPower Level: {robots.listOfRobots[i].powerLevel}\n");
+                Console.WriteLine($"{robots.listOfRobots[i].name}\nHealth: {robots.listOfRobots[i].health}\nPower Level: {robots.listOfRobots[i].powerLevel}\nWeapon: {robots.listOfRobots[i].weapon.type}\n");
             }
             if (dinosAreDead==true)
             {

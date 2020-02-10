@@ -11,6 +11,7 @@ namespace RobotsVSDinosaurs
         //member vars
         public string type;
         public int attackPower;
+        
         //constructor
         public Weapon(string type, int attackPower )
         {
@@ -18,9 +19,6 @@ namespace RobotsVSDinosaurs
             this.attackPower = attackPower;
         }
         //methods
-        public void DeployWeapon()
-        {
-            
-        }
+        
     }
 }
