@@ -8,29 +8,24 @@ namespace RobotsVSDinosaurs
 {
     class Battlefield
     {
+        Random randomNumber = new Random();
         int attackLowValue = 15;
         int attackHighValue = 50;
         //methods
         public void StartBattle()
         {
             //instantiate the 3 dinos and 3 robots and add them to a list
-            Random randomNumber = new Random();
-            Dinosaur raptor = new Dinosaur("raptor", 100, 100, randomNumber.Next(attackLowValue, attackHighValue));
-            System.Threading.Thread.Sleep(150);
-            Dinosaur bronto = new Dinosaur("brontosaurus", 100, 80, randomNumber.Next(attackLowValue, attackHighValue));
-            System.Threading.Thread.Sleep(150);
-            Dinosaur stego = new Dinosaur("stegosaurus", 100, 75, randomNumber.Next(attackLowValue,attackHighValue));
-            System.Threading.Thread.Sleep(150);
-            Robot blueRobot = new Robot("caboose", 100, 100, new Weapon("Energy Sword", randomNumber.Next(attackLowValue,attackHighValue)));
-            System.Threading.Thread.Sleep(150);
-            Robot redRobot = new Robot("Sarge", 100, 100, new Weapon("Assault Rifle", randomNumber.Next(attackLowValue,attackHighValue)));
-            System.Threading.Thread.Sleep(150);
+            Dinosaur raptor = new Dinosaur("raptor", 100, 100, randomNumber.Next(attackLowValue, attackHighValue));            
+            Dinosaur bronto = new Dinosaur("brontosaurus", 100, 80, randomNumber.Next(attackLowValue, attackHighValue));            
+            Dinosaur stego = new Dinosaur("stegosaurus", 100, 75, randomNumber.Next(attackLowValue,attackHighValue));            
+            Robot blueRobot = new Robot("caboose", 100, 100, new Weapon("Energy Sword", randomNumber.Next(attackLowValue,attackHighValue)));            
+            Robot redRobot = new Robot("Sarge", 100, 100, new Weapon("Assault Rifle", randomNumber.Next(attackLowValue,attackHighValue)));            
             Robot pinkRobot = new Robot("Simmons", 100, 100, new Weapon("Sniper", randomNumber.Next(attackLowValue,attackHighValue)));
             Herd dinos = new Herd(new List<Dinosaur> { raptor, bronto, stego });
             Fleet robots = new Fleet(new List<Robot> { blueRobot, redRobot, pinkRobot });
             Console.WriteLine("Welcome to Robot VS Dinosaur! \n \n Press enter to begin...\n");
             Console.ReadLine();
-            //set the variables for the attackCounter and how many attacks each warrior gets
+            //set the member variables 
             int attackCounter = 0;
             int attacksPerFighter = 1;
             bool dinosAreDead = false;
@@ -39,6 +34,7 @@ namespace RobotsVSDinosaurs
             //while loop that runs while both sides are still alive
             while (dinosAreDead == false && robotsAreDead == false)
             {
+                //before we attack we will check to see if either side is completely dead
                 if (dinos.listOfDinos[0].isAlive == false && dinos.listOfDinos[1].isAlive == false && dinos.listOfDinos[2].isAlive == false)
                 {
                     dinosAreDead = true;
@@ -49,16 +45,21 @@ namespace RobotsVSDinosaurs
                     robotsAreDead = true;
                     continue;
                 }
+                //since neither side is dead, we will begin with the robots attacking first                
                 for (int i=0; i<dinos.listOfDinos.Count;i++)
                 {
+                    //each robot gets to attack the number of times as defined by the variable attacksPerFighter
                     while (attackCounter<attacksPerFighter)
                     {
+                        //attack only occurs if the dinos health is above zero
                         if (dinos.listOfDinos[i].health > 0)
                         {
                             dinos.listOfDinos[i].health -= robots.listOfRobots[i].weapon.attackPower;
-                            dinos.listOfDinos[i].energy -= costOfAttack;
+                            robots.listOfRobots[i].powerLevel -= costOfAttack;
                             attackCounter++;
                         }
+                        //if the health is at or below zero the variable isAlive is set to false
+                        //health is set to zero since a negative health doesn't make sense
                         else
                         {
                             dinos.listOfDinos[i].isAlive = false;
@@ -66,6 +67,7 @@ namespace RobotsVSDinosaurs
                             break;
                             }
                         }
+                    //i have this here to check if the opponent is dead just in case the fighter doesn't have any more attacks left
                     attackCounter = 0;
                     if (dinos.listOfDinos[i].health<=0)
                     {
@@ -73,20 +75,25 @@ namespace RobotsVSDinosaurs
                         dinos.listOfDinos[i].health = 0;
                     }
                 }
+                //a quick check in between switching sides to see if it is necessary to continue the battle
                 if (dinosAreDead == true)
                 {
                     break;
                 }
+                //loop through the robots for the dinos to attack
                 for (int i=0;i<robots.listOfRobots.Count;i++)
                 {
+                    //each dino gets to attack the number of times as defined by the variable attacksPerFighter
                     while (attackCounter<attacksPerFighter)
                     {
+                        //attack only occurs if the robots health is above zero
                         if (robots.listOfRobots[i].health > 0)
                         {
                             robots.listOfRobots[i].health-=dinos.listOfDinos[i].attackPower;
-                            robots.listOfRobots[i].powerLevel -= costOfAttack;
+                            dinos.listOfDinos[i].energy -= costOfAttack;
                             attackCounter++;
                         }
+                        //if the robots health is below zero, they are declared dead and health set to zero
                         else
                         {
                             robots.listOfRobots[i].isAlive = false;
@@ -94,6 +101,7 @@ namespace RobotsVSDinosaurs
                             break;
                         }
                     }
+                // this is here just in case the above while loop doesn't run due to the number of attacks reaching the limit
                 attackCounter = 0;
                 if (robots.listOfRobots[i].health<=0)
                     {
@@ -102,20 +110,7 @@ namespace RobotsVSDinosaurs
                     }
                 }
             }
-            //for (int i = 0; i < dinos.listOfDinos.Count; i++)
-            //{
-            //    for (int j = 0; j < robots.listOfRobots.Count; j++)
-            //    {
-            //        if(dinos.listOfDinos[i].health > 0)
-            //        {
-            //            while (dinos.listOfDinos[i].health >0) 
-            //            {
-            //                dinos.listOfDinos[i].DinoAttackRobot();
-            //                attackCounter++;
-            //            }
-            //        }
-            //    }
-            //}
+            //write the results to the console
             Console.WriteLine("The Dinosaurs\n");
             for (int i=0; i<dinos.listOfDinos.Count; i++)
             {
