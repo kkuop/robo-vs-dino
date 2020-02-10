@@ -8,18 +8,23 @@ namespace RobotsVSDinosaurs
 {
     class Battlefield
     {
-        int attackLowValue = 25;
-        int attackHighValue = 75;
+        int attackLowValue = 15;
+        int attackHighValue = 50;
         //methods
         public void StartBattle()
         {
             //instantiate the 3 dinos and 3 robots and add them to a list
             Random randomNumber = new Random();
             Dinosaur raptor = new Dinosaur("raptor", 100, 100, randomNumber.Next(attackLowValue, attackHighValue));
+            System.Threading.Thread.Sleep(150);
             Dinosaur bronto = new Dinosaur("brontosaurus", 100, 80, randomNumber.Next(attackLowValue, attackHighValue));
+            System.Threading.Thread.Sleep(150);
             Dinosaur stego = new Dinosaur("stegosaurus", 100, 75, randomNumber.Next(attackLowValue,attackHighValue));
+            System.Threading.Thread.Sleep(150);
             Robot blueRobot = new Robot("caboose", 100, 100, new Weapon("Energy Sword", randomNumber.Next(attackLowValue,attackHighValue)));
+            System.Threading.Thread.Sleep(150);
             Robot redRobot = new Robot("Sarge", 100, 100, new Weapon("Assault Rifle", randomNumber.Next(attackLowValue,attackHighValue)));
+            System.Threading.Thread.Sleep(150);
             Robot pinkRobot = new Robot("Simmons", 100, 100, new Weapon("Sniper", randomNumber.Next(attackLowValue,attackHighValue)));
             Herd dinos = new Herd(new List<Dinosaur> { raptor, bronto, stego });
             Fleet robots = new Fleet(new List<Robot> { blueRobot, redRobot, pinkRobot });
@@ -68,10 +73,14 @@ namespace RobotsVSDinosaurs
                         dinos.listOfDinos[i].health = 0;
                     }
                 }
-            for (int i=0;i<robots.listOfRobots.Count;i++)
-            {
-                while (attackCounter<attacksPerFighter)
+                if (dinosAreDead == true)
                 {
+                    break;
+                }
+                for (int i=0;i<robots.listOfRobots.Count;i++)
+                {
+                    while (attackCounter<attacksPerFighter)
+                    {
                         if (robots.listOfRobots[i].health > 0)
                         {
                             robots.listOfRobots[i].health-=dinos.listOfDinos[i].attackPower;
@@ -84,14 +93,14 @@ namespace RobotsVSDinosaurs
                             robots.listOfRobots[i].health = 0;
                             break;
                         }
-                }
-                    attackCounter = 0;
-                    if (robots.listOfRobots[i].health<=0)
+                    }
+                attackCounter = 0;
+                if (robots.listOfRobots[i].health<=0)
                     {
                         robots.listOfRobots[i].isAlive = false;
                         robots.listOfRobots[i].health = 0;
                     }
-            }
+                }
             }
             //for (int i = 0; i < dinos.listOfDinos.Count; i++)
             //{
