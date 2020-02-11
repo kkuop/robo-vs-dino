@@ -8,6 +8,7 @@ namespace RobotsVSDinosaurs
 {
     class Battlefield
     {
+        //member vars
         Random randomNumber = new Random();
         int attackLowValue = 5;
         int attackHighValue = 50;
@@ -20,10 +21,15 @@ namespace RobotsVSDinosaurs
         int blueWeaponChoice;
         int redWeaponChoice;
         int pinkWeaponChoice;
-                
+        int attackCounter = 0;
+        bool dinosAreDead = false;
+        bool robotsAreDead = false;
+        int costOfAttack = 10;
+
         //methods
         public void StartBattle()        
         {
+            //introduce the dinosaurs and create the objects
             Console.WriteLine("Welcome to the battle of the Robots and Dinosaurs.\n");
             Console.WriteLine("Let's introduce the dinosaurs... press enter to continue");
             Console.ReadLine();
@@ -37,7 +43,7 @@ namespace RobotsVSDinosaurs
             Console.WriteLine($"\n{stego.type}\nHealth: {stego.health}\nEnergy: {stego.energy}");
             Console.ReadLine();
 
-
+            // create the weapon objects and assign them to the variable for each robot
             Weapon firstChoice = new Weapon(this.firstChoice, randomNumber.Next(attackLowValue, attackHighValue));
             Weapon secondChoice = new Weapon(this.secondChoice, randomNumber.Next(attackLowValue, attackHighValue));
             Weapon thirdChoice = new Weapon(this.thirdChoice, randomNumber.Next(attackLowValue, attackHighValue));
@@ -114,22 +120,27 @@ namespace RobotsVSDinosaurs
                     Console.WriteLine("\nThat is not a valid choice... try again.");
                 }
             }
-            
-            
-            Robot blueRobot = new Robot("Caboose", 100, 100, weapons.listOfWeapons[blueWeaponChoice]);            
-            Robot redRobot = new Robot("Sarge", 100, 100, weapons.listOfWeapons[redWeaponChoice]);
-            Robot pinkRobot = new Robot("Simmons", 100, 100, weapons.listOfWeapons[pinkWeaponChoice]);
 
+            //create the robot objects and use the weapon variable to pass a weapon in as a parameter
+            Console.WriteLine("Now introducing the robots...");
+            Console.ReadLine();
+            Robot blueRobot = new Robot("Caboose", 100, 100, weapons.listOfWeapons[blueWeaponChoice]);
+            Console.WriteLine($"{blueRobot.name} (Blue)\nHealth: {blueRobot.health}\nPower Level: {blueRobot.powerLevel}\nWeapon: {blueRobot.weapon.type}");
+            Console.ReadLine();
+            Robot redRobot = new Robot("Sarge", 100, 100, weapons.listOfWeapons[redWeaponChoice]);
+            Console.WriteLine($"{redRobot.name} (Red)\nHealth: {redRobot.health}\nPower Level: {redRobot.powerLevel}\nWeapon: {redRobot.weapon.type}");
+            Console.ReadLine();
+            Robot pinkRobot = new Robot("Simmons", 100, 100, weapons.listOfWeapons[pinkWeaponChoice]);
+            Console.WriteLine($"{pinkRobot.name} (Pink)\nHealth: {pinkRobot.health}\nPower Level: {pinkRobot.powerLevel}\nWeapon: {pinkRobot.weapon.type}");
+            Console.ReadLine();
+
+            // add them to their respective lists
             Herd dinos = new Herd(new List<Dinosaur> { raptor, bronto, stego });
             Fleet robots = new Fleet(new List<Robot> { blueRobot, redRobot, pinkRobot });
             
-            //set the member variables 
-            int attackCounter = 0;
-            bool dinosAreDead = false;
-            bool robotsAreDead = false;
-            int costOfAttack = 10;
             Console.WriteLine("\nLet the fight begin...\n");
             Console.ReadLine();
+
             //while loop that runs while both sides are still alive
             while (dinosAreDead == false && robotsAreDead == false)
             {
@@ -145,7 +156,7 @@ namespace RobotsVSDinosaurs
                 //since neither side is dead, we will begin with the robots attacking first                
                 for (int i=0; i<dinos.listOfDinos.Count;i++)
                 {
-                    //each robot gets to attack the number of times as defined by the variable attacksPerFighter
+                    //each robot gets to attack the number of times as defined by the random number generator
                     while (attackCounter < randomNumber.Next(1, 5))
                     {
                         //attack only occurs if the dinos health is above zero
@@ -180,7 +191,7 @@ namespace RobotsVSDinosaurs
                 //loop through the robots for the dinos to attack
                 for (int i=0;i<robots.listOfRobots.Count;i++)
                 {
-                    //each dino gets to attack the number of times as defined by the variable attacksPerFighter
+                    //each dino gets to attack the number of times as defined by the random number generator
                     while (attackCounter<randomNumber.Next(1,5))
                     {
                         //attack only occurs if the robots health is above zero
