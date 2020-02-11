@@ -24,8 +24,8 @@ namespace RobotsVSDinosaurs
         //methods
         public void StartBattle()        
         {
-            Console.WriteLine("Welcome to the battle of the Robots and Dinosaurs.");
-            Console.WriteLine("Let's introduce the dinosaurs...");
+            Console.WriteLine("Welcome to the battle of the Robots and Dinosaurs.\n");
+            Console.WriteLine("Let's introduce the dinosaurs... press enter to continue");
             Console.ReadLine();
             Dinosaur raptor = new Dinosaur("Raptor", 100, 100, randomNumber.Next(attackLowValue, attackHighValue));            
             Console.WriteLine($"\n{raptor.type}\nHealth: {raptor.health}\nEnergy: {raptor.energy}");
@@ -125,7 +125,6 @@ namespace RobotsVSDinosaurs
             
             //set the member variables 
             int attackCounter = 0;
-            int attacksPerFighter = 1;
             bool dinosAreDead = false;
             bool robotsAreDead = false;
             int costOfAttack = 10;
@@ -147,7 +146,7 @@ namespace RobotsVSDinosaurs
                 for (int i=0; i<dinos.listOfDinos.Count;i++)
                 {
                     //each robot gets to attack the number of times as defined by the variable attacksPerFighter
-                    while (attackCounter<attacksPerFighter)
+                    while (attackCounter < randomNumber.Next(1, 5))
                     {
                         //attack only occurs if the dinos health is above zero
                         if (dinos.listOfDinos[i].health > 0)
@@ -182,7 +181,7 @@ namespace RobotsVSDinosaurs
                 for (int i=0;i<robots.listOfRobots.Count;i++)
                 {
                     //each dino gets to attack the number of times as defined by the variable attacksPerFighter
-                    while (attackCounter<attacksPerFighter)
+                    while (attackCounter<randomNumber.Next(1,5))
                     {
                         //attack only occurs if the robots health is above zero
                         if (robots.listOfRobots[i].health > 0)
